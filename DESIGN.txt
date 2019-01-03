@@ -8,13 +8,13 @@ Mancala: A two-player mancala game.
 	   The cups and mandala will be formatted as shown below.
 	   Each player's cups and mancala will be located at the
 	   bottom of the board.
-             M{} |{ }{ }{ }{ }{ }{ }|      <-- opponent's side
-	         |{ }{ }{ }{ }{ }{ }| M{}  <-- current player's side
-	           A  B  C  D  E  F
+             	 |{ }{ }{ } M{} { }{ }{ }|   <-- opponent's side
+	         |{ }{ }{ } M{} { }{ }{ }|   <-- current player's side
+	           A  B  C       D  E  F
 	2. At the start of the game, each cup has 4 marbles
-             M{} |{4}{4}{4}{4}{4}{4}|
-                 |{4}{4}{4}{4}{4}{4}| M{}
-	           A  B  C  D  E  F
+                 |{4}{4}{4} M{} {4}{4}{4}|
+                 |{4}{4}{4} M{} {4}{4}{4}| 
+	           A  B  C       D  E  F
 	3. Taking turns, each player inputs their cup of choice.
 	   All the marbles in that cup will be distributed counter-clockwise into the
 	   other cups and to the current player's mancala (one per cup).
@@ -24,13 +24,13 @@ Mancala: A two-player mancala game.
 	      current player's side, all marbles in the cup directly above as well as
 	      the current cup will be placed in the player's mancala.
 	    Example
-              M{6} |{3}{5}{1}{3}{6}{2}|
-	           |{0}{4}{2}{3}{1}{8}| M{4}
-		     A  B  C  D  E  F
+                   |{3}{5}{1} M{6} {3}{6}{2}|
+	           |{0}{4}{2} M{4} {3}{1}{8}| 
+		     A  B  C        D  E  F
               [Player A] Cup of Choice: F
 	      ----- Current Board -----
-              M{6} |{0}{6}{2}{4}{7}{3}|
-	           |{0}{4}{2}{3}{1}{0}| M{10}
+                   |{4}{6}{2} M{6}  {4}{7}{3}|
+	           |{1}{5}{2} M{10} {3}{1}{0}| <-- player's side 
         4. The game ends when all six cups on either side of the board are empty. The
            player with remaining marbles in their cups at the end of a game automatically
 	   places the marbles into their own mancala. The player with the most marbles in
@@ -42,12 +42,10 @@ Mancala: A two-player mancala game.
 Topics covered:
 	Allocating memory: store game progress so it can be resumed at a later time
 	Working w/ Files: memory will be saved in files
-	Processes: 
+	Processes: uses multiple processes
 	Signals: handle forced user log offs
 	Pipes: send player-player data
-	Shared Memory: 
-	Semaphores: 
-	Networking: 
+	Networking: multiple computers
 	
 Responsibilities:
 -buckets and user-interface design: Tania
