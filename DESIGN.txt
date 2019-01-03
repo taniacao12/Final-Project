@@ -1,0 +1,62 @@
+Fareeha Tabassum, Tania Cao
+
+Mancala: A two-player mancala game. 
+	Rules for Basic Mancala and User-Interface:
+	1.You have 6 buckets on your half, and your opponent has 6 buckets
+	 and each of you have one mancala(M)
+	 The buckets will look like:
+	 M{}{}{}{} {}{}{}
+	    {}{}{} {}{}{} M{}
+	2.Each bucket gets 4 marbles in the beginning
+	We could put actual marbles represented by X to make it look like this {XXXX}
+	 M{}{4}{4}{4} {4}{4}{4}
+	    {4}{4}{4} {4}{4}{4} M{}	  
+	3.first, one player goes. They choose any bucket to start with,
+	 take all the "marbles" and distribute one to each bucket (moving counter-clockwise), including
+	 their mancala(M) but not their opponent's one.
+	 --If, when dropping stones in holes, you drop a stone into your own mancala, 
+	 and that is the last stone in your hand, then you get to go again.
+	 --If, when dropping stones into holes, you drop a stone into a hole that was 
+	 previously empty, AND the hole is on your side, AND that was the last stone 
+	 in your hand, you take all of the stones in the hole directly above, and
+	 place them into your mancala.
+	 example of one player's round. 
+	 M{0}{4}{4}{4} {4}{4}{4}
+	     {4}{4}{0} {5}{5}{5} M{1}
+     M{0}{5}{5}{5} {0}{4}{4}
+	     {5}{4}{0} {5}{5}{5} M{1}
+	4.The game ends when all six spaces on one side of the Mancala board are empty.
+	  The player who still has pieces on his side of the board when the game ends capture all of those pieces.
+	  Count all the pieces in each store. The winner is the player with the most pieces.
+	-We are going to program the game to run all of that automatically.
+	-The main thing where the player to player communication comes into play is when one player 
+	sends out the info of what the user did and the updated mancala board
+	-The only thing the user will be doing is specifying which bucket they want to play.
+	-They will do that by indicating the number of the bucket they want to play assuming it's in this pattern:
+	12 11 10 09 08 07
+	01 02 03 04 05 06
+	
+Topics covered:
+	Allocating memory: used to store the account of the player so it can be resumed at a later time
+	Working w/ Files: The data for each player will be stored in each file
+	Processes: 
+	Signals: Signal handling will be used to handle forced user log offs
+	Pipes: Will be used to send player-player data
+	Shared Memory: 
+	Semaphores: 
+	Networking: 
+	
+Responsibilities:
+-buckets and user-interface design: Tania
+-file storage: Fareeha, Tania
+-implementation of game rules: Fareeha
+-player to player connection: Fareeha, Tania
+-account storing: Fareeha, Tania
+
+Timeline:
+-1/03: Proposal (sorry it's late Mr. DW)
+-1/05: buckets, user-interface design 
+-1/08: file storage
+-1/10: implementation of game rules
+-1/15: player to player connection
+-1/17: account storing
