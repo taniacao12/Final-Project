@@ -17,7 +17,7 @@ void server_handshake(int from_client, int *to_client, char *msg) {
     write(*to_client, msg, HANDSHAKE_BUFFER_SIZE);
     // get response from client
     read(from_client, msg, HANDSHAKE_BUFFER_SIZE);
-    printf("[SUBSERVER %d] CLIENT MESSAGE:[%s]\n", getpid(), msg);
+    printf("[SUBSERVER %d] CLIENT MESSAGE: %s\n", getpid(), msg);
     // return file descriptor to well known pipe
     printf("[SUBSERVER %d] HANDSHAKE COMPLETE\n", getpid());
 }
