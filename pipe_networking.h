@@ -16,19 +16,8 @@
 #define HANDSHAKE_BUFFER_SIZE 10
 #define BUFFER_SIZE 1000
 
-static void sighandler (int signo);
-int server_handshake(int *from_client, int *to_client, char *message);
-int client_handshake (int *to_server);
-
-void to_upper (char * data) {
-  int i = 0;
-  while (data[i]) {
-    if (i%2) {
-      // convert to uppercase
-      data[i] = toupper(data[i]);
-    }
-    i++;
-  }
-}
+static void sighandler(int signo);
+void server_handshake(int from_client, int *to_client, char *msg);
+int client_handshake(int *to_server);
 
 #endif
