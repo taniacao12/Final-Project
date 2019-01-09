@@ -1,6 +1,5 @@
 #include "pipe_networking.h"
 
-
 /*=========================
   server_handshake
   args: int * to_client
@@ -40,8 +39,8 @@ int client_handshake(int *to_server) {
         printf("ERROR: %d --> %s\n", errno, strerror(errno));
         return 1;
     }
-    printf("[CLIENT] CREATED PRIVATE PIPE\n");
-    // set to_server to wwll known pipe
+    //printf("[CLIENT] CREATED PRIVATE PIPE\n");
+    // set to_server to well known pipe
     *to_server = open("main", O_WRONLY);
     if (*to_server == - 1) {
         printf("ERROR: %d --> %s\n", errno, strerror(errno));
@@ -50,16 +49,16 @@ int client_handshake(int *to_server) {
     }
     // send private FIFO name to server
     int w = write(*to_server, pipe_name, HANDSHAKE_BUFFER_SIZE);
-    printf("[CLIENT] SENT PRIVATE PIPE NAME TO SERVER\n");
+    //printf("[CLIENT] SENT PRIVATE PIPE NAME TO SERVER\n");
     // wait for response
     int receive = open(pipe_name, O_RDONLY);
     // receive server message
     char msg[HANDSHAKE_BUFFER_SIZE];
     int r = read(receive, msg, HANDSHAKE_BUFFER_SIZE);
-    printf("[CLIENT] SERVER MESSAGE: %s\n", msg);
+    //printf("[CLIENT] SERVER MESSAGE: %s\n", msg);
     // remove private FIFO
     remove(pipe_name);
-    printf("[CLIENT] REMOVED PRIVATE PIPE\n");
+    //printf("[CLIENT] REMOVED PRIVATE PIPE\n");
     // send response to server
     w = write(*to_server, ACK, HANDSHAKE_BUFFER_SIZE);
     // return file descriptor to private FIFO
