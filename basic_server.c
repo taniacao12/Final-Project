@@ -1,4 +1,5 @@
 #include "pipe_networking.h"
+#include <sys/socket.h>
 
 int main() {
   signal(SIGINT, sighandler);
