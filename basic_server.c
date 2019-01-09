@@ -9,6 +9,8 @@ int main() {
     printf("ERROR: %d --> %s\n", errno, strerror(errno));
     return 1;
   }
+
+  struct addrinfo *something, *something1;
   
   while (1) {
     // create well known pipe
