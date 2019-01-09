@@ -11,13 +11,17 @@
 
 #ifndef NETWORKING_H
 #define NETWORKING_H
-#define ACK "hello"
+#define ACK "HOLA"
 
 #define HANDSHAKE_BUFFER_SIZE 10
 #define BUFFER_SIZE 1000
 
 static void sighandler(int signo);
+
 void server_handshake(int from_client, int *to_client, char *msg);
+
 int client_handshake(int *to_server);
+
+void to_upper(char * data);
 
 #endif
