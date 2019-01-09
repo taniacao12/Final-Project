@@ -2,33 +2,30 @@
 
 
 int main() {
-
     signal(SIGINT, sighandler);
-
+    
     while (1) {
         // create well known pipe
         int mk_wkp = mkfifo("main", 0644);
         if (mk_wkp == - 1) {
-            printf("error %d: %s\n", errno, strerror(errno));
+            printf("ERROR: %d --> %s\n", errno, strerror(errno));
             return 1;
         }
-        else printf("[server] wkp has been created!\n");
+        else printf("[SERVER] CREATED WELL KNOWN PIPE\n");
         // wait
         int wkp = open("main", O_RDONLY);
-        // receive msg
+        // receive message
         char msg[HANDSHAKE_BUFFER_SIZE];
         read(wkp, msg, HANDSHAKE_BUFFER_SIZE);
-        printf("[server] received message:[%s]\n", msg);
-
+        printf("[SERVER] CLIENT MESSAGE: %s\n", msg);
         // fork subserver
         int f = fork();
 
         if (f) { // parent
-            // rm wkp
+            // remove well known pipe
             remove("main");
             close(wkp);
-            printf("[server] wkp has been removed\n");
-
+            printf("[SERVER] REMOVED WELL KNOWN PIPE\n");
         }
         else { // subserver
             int to_client;
@@ -36,25 +33,26 @@ int main() {
 
             from_client = wkp;
             server_handshake( from_client, &to_client, msg );
-            // printf("from_client: %d\n", from_client);
-
             char data[BUFFER_SIZE];
             // get data from client
             while(read(from_client, data, BUFFER_SIZE)) {
-                printf("[subserver %d] received: %s", getpid(), data);
+                printf("[SUBSERVER %d] CLIENT MESSAGE: %s", getpid(), data);
                 // process data
-                to_upper(data);
+                int i = 0;
+    			while (data[i]) {
+                    if (i%2)
+                        data[i] = toupper(data[i]); // convert to uppercase
+        			i++;
+				}
                 // reply to client
                 int w = write(to_client, data, BUFFER_SIZE);
             }
-
             close(to_client);
             close(from_client);
-            printf("[subserver %d] session closed\n", getpid());
+            printf("[SUBSERVER %d] SESSION COMPLETE\n", getpid());
             return 0;
         }
     }
-
     return 0;
 }
 
