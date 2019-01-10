@@ -38,7 +38,8 @@ int main() {
     else { // subserver
       int to_client;
       int from_client;
-
+      int start = 0;
+      
       from_client = wkp;
       server_handshake( from_client, &to_client, msg );
       char data[BUFFER_SIZE];

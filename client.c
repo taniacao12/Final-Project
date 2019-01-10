@@ -6,9 +6,19 @@ int main() {
 
   from_server = client_handshake( &to_server );
   char data[BUFFER_SIZE];
+  char user[BUFFER_SIZE];
+  
+  // welcome user and get their username
+  printf("WELCOME TO TEAMANCALA!\n");
+  printf("What is your name? ");
+  fgets(user, BUFFER_SIZE, stdin);
+  // give user the game instructions
+  printf("Hi %s! Here are the rules to the game:\n", user);
+  // rules
+  // insert rules here
+  printf("If you are ready, press ENTER to start the game.");
+  fgets(user, BUFFER_SIZE, stdin);
   while (1) {
-    // welcome user and give them game instructions
-    
     // get user input
     printf("ENTER MESSAGE: ");
     fgets(data, BUFFER_SIZE, stdin);
@@ -17,6 +27,6 @@ int main() {
     // get reponse from server
     int r = read(from_server, data, BUFFER_SIZE);
     // display response
-    printf("[CLIENT] SERVER MESSAGE: %s", data);
+    printf("[%s] SERVER MESSAGE: %s", user, data);
   }
 }
