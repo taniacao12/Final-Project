@@ -14,10 +14,8 @@ int main() {
   printf("What is your name? ");
   fgets(user, BUFFER_SIZE, stdin);
   user[strlen(user) - 1] = 0;
-  // give user the game instructions
-  printf("Hi %s! Here are the rules to the game:\n", user);
-  // rules
-  // insert rules here
+  // give or skip game instructions
+  instructions();
   printf("If you are ready, press ENTER to start the game.");
   fgets(start, BUFFER_SIZE, stdin);
   printf("------------------------------------------------\n");
@@ -33,5 +31,17 @@ int main() {
     int r = read(from_server, data, BUFFER_SIZE);
     // display response
     printf("[%s] SERVER MESSAGE: %s", user, data);
+  }
+}
+
+void instructions() {
+  char data[BUFFER_SIZE];
+  printf("Do you want the game instructions? (y/n)");
+  fgets(data, BUFFER_SIZE, stdin);
+  while (data) {
+    if (data == "y")
+      instructions();
+    if (data == "n")
+      break;
   }
 }
