@@ -1,5 +1,9 @@
-#include "pipe_networking.h"
+//#include "pipe_networking.h"
+#include "networking.h"
 
+void instructions();
+
+/*
 int main() {
   int to_server;
   int from_server;
@@ -8,6 +12,21 @@ int main() {
   char data[BUFFER_SIZE];
   char user[BUFFER_SIZE];
   char start[BUFFER_SIZE];
+*/
+
+int main(int argc, char **argv) {
+
+  int server_socket;
+  char buffer[BUFFER_SIZE];
+  char data[BUFFER_SIZE];
+  char user[BUFFER_SIZE];
+  char start[BUFFER_SIZE];
+
+  if (argc == 2)
+    server_socket = client_setup( argv[1]);
+  else
+    server_socket = client_setup( TEST_IP );
+
   // welcome user and get their username
   printf("WELCOME TO TEAMANCALA!\n");
   // get user name
@@ -26,9 +45,9 @@ int main() {
     printf("ENTER MESSAGE: ");
     fgets(data, BUFFER_SIZE, stdin);
     // send data to server
-    int w = write(to_server, data, BUFFER_SIZE);
+    int w = write(server_socket, data, BUFFER_SIZE);
     // get reponse from server
-    int r = read(from_server, data, BUFFER_SIZE);
+    int r = read(server_socket, data, BUFFER_SIZE);
     // display response
     printf("[%s] SERVER MESSAGE: %s", user, data);
   }

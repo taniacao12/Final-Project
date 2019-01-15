@@ -1,6 +1,48 @@
-#include "pipe_networking.h"
+//#include "pipe_networking.h"
 #include <sys/socket.h>
+#include "networking.h"
 
+static void sighandler(int signo) {
+  if (signo == SIGINT) {
+    remove("main");
+    printf("wkp removed\n");
+    exit(0);
+  }
+}
+
+void subserver(int from_client);
+
+int main() {
+
+  int listen_socket;
+  int f;
+  listen_socket = server_setup();
+
+  while (1) {
+
+    int client_socket = server_connect(listen_socket);
+    f = fork();
+    if (f == 0)
+      subserver(client_socket);
+    else
+      close(client_socket);
+  }
+}
+
+void subserver(int client_socket) {
+  char buffer[BUFFER_SIZE];
+
+  while (read(client_socket, buffer, sizeof(buffer))) {
+
+    printf("[subserver %d] received: [%s]\n", getpid(), buffer);
+    process(buffer);
+    write(client_socket, buffer, sizeof(buffer));
+  }//end read loop
+  close(client_socket);
+  exit(0);
+}
+
+/*
 int main() {
   signal(SIGINT, sighandler);
 
@@ -64,11 +106,4 @@ int main() {
   }
   return 0;
 }
-
-static void sighandler(int signo) {
-  if (signo == SIGINT) {
-    remove("main");
-    printf("wkp removed\n");
-    exit(0);
-  }
-}
+*/
