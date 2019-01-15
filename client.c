@@ -50,8 +50,8 @@ void instructions() {
     printf("3.  On your turn, each player you will be asked to input your cup of choice.\n");
     printf("    All the marbles in that cup will then be distributed counter-clockwise\n");
     printf("    into the other cups and to your mancala (one per cup).\n");
-    printf("      a) If the last marble distributed ends up in your mancala, you get an extra play.\n");
-    printf("      b) If the last marble distributed ends up in an empty cup on your side of the\n");
+    printf("      a) If the last marble distributed lands in your mancala, you get an extra play.\n");
+    printf("      b) If the last marble distributed lands in an empty cup on your side of the\n");
     printf("         board, all marbles in the current cup and the cup directly above will be\n");
     printf("         placed in your mancala. Here's an example:\n");
     printf("           M{6} | {3} {5} {1} {3} {6} {2} |\n");
