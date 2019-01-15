@@ -46,7 +46,7 @@ Topics covered:
 Responsibilities:
 - buckets and user-interface design: Tania
 - file storage: Fareeha, Tania
-- implementation of game rules: Fareeha
+- implementation of game rules: Tania
 - player to player connection: Fareeha, Tania
 - account storing: Fareeha, Tania
 
