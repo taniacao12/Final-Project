@@ -41,17 +41,38 @@ int main(int argc, char **argv) {
   fgets(start, BUFFER_SIZE, stdin);
   printf("-----------------------------------------------------\n");
     
-  char board[12];
+  int board[2][7]; //board is just for the server, we're manually printing the game board
+  for (int i = 0; i<2; i++){
+    for (int j = 0; j<7; j++){
+      board[i][j] = 4;
+    } 
+  }
+
+  //it works just testing
+  /*
+  for(int i=0; i<2; i++) {
+      for(int j=0;j<7;j++) {
+         printf("%d ", board[i][j]);
+         if(j==6){
+            printf("\n");
+         }
+      }
+   } */
+  
+  printf("           M{ } | {4} {4} {4} {4} {4} {4} |      \n");
+  printf("                | {4} {4} {4} {4} {4} {4} | M{ } \n");
+  printf("                   A   B   C   D   E   F   \n");
+    
   while (1) {
     // get user input
-    printf("ENTER MESSAGE: ");
+    printf("Which cup would you like to choose? ");
     fgets(data, BUFFER_SIZE, stdin);
     // send data to server
     int w = write(server_socket, data, BUFFER_SIZE);
     // get reponse from server
     int r = read(server_socket, data, BUFFER_SIZE);
     // display response
-    printf("[%s] SERVER MESSAGE: %s", user, data);
+    printf("%s", data);
   }
 }
 
