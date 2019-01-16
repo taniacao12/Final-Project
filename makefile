@@ -4,7 +4,7 @@ client: client.o networking.o
 	gcc -o client client.o networking.o
 
 server: fserver.o networking.o
-	gcc -o server basic_server.o networking.o
+	gcc -o server server.o networking.o
 
 client.o: client.c networking.h
 	gcc -c client.c
