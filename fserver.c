@@ -11,6 +11,7 @@ static void sighandler(int signo) {
 }
 
 void subserver(int from_client);
+void process(char * name);
 
 int main() {
 
@@ -40,6 +41,16 @@ void subserver(int client_socket) {
   }//end read loop
   close(client_socket);
   exit(0);
+}
+
+void process(char * s) {
+  while (*s) {
+    if (*s >= 'a' && *s <= 'z')
+      *s = ((*s - 'a') + 13) % 26 + 'a';
+    else  if (*s >= 'A' && *s <= 'Z')
+      *s = ((*s - 'a') + 13) % 26 + 'a';
+    s++;
+  }
 }
 
 /*
