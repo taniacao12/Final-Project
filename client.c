@@ -33,8 +33,10 @@ int main(int argc, char **argv) {
   printf("What is your name? ");
   fgets(user, BUFFER_SIZE, stdin);
   user[strlen(user) - 1] = 0;
+  printf("Welcome %s\n", user);
   // give or skip game instructions
   instructions();
+
   printf("If you are ready, press ENTER to start the game.");
   fgets(start, BUFFER_SIZE, stdin);
   printf("-----------------------------------------------------\n");

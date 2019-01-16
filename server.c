@@ -19,6 +19,7 @@ int main() {
   int f;
   listen_socket = server_setup();
 
+  
   while (1) {
 
     int client_socket = server_connect(listen_socket);
