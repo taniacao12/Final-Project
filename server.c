@@ -14,7 +14,7 @@ void subserver(int from_client);
 void process(char * name);
 
 int main() {
-
+  signal(SIGINT, sighandler);
   int listen_socket;
   int f;
   listen_socket = server_setup();
