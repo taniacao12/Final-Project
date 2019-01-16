@@ -40,15 +40,15 @@ int main(int argc, char **argv) {
   printf("If you are ready, press ENTER to start the game.");
   fgets(start, BUFFER_SIZE, stdin);
   printf("-----------------------------------------------------\n");
-    
+
   int board[2][7]; //board is just for the server, we're manually printing the game board
   for (int i = 0; i<2; i++){
     for (int j = 0; j<7; j++){
       board[i][j] = 4;
-    } 
+    }
   }
 
-  //it works just testing
+  //it works just testing it
   /*
   for(int i=0; i<2; i++) {
       for(int j=0;j<7;j++) {
@@ -58,15 +58,16 @@ int main(int argc, char **argv) {
          }
       }
    } */
-  
+
   printf("           M{ } | {4} {4} {4} {4} {4} {4} |      \n");
   printf("                | {4} {4} {4} {4} {4} {4} | M{ } \n");
   printf("                   A   B   C   D   E   F   \n");
-    
+
   while (1) {
     // get user input
     printf("Which cup would you like to choose? ");
     fgets(data, BUFFER_SIZE, stdin);
+    //WE NEED TO SEND BOTH THE BOARD AND THE ANSWER THAT THE PERSON CHOOSES TO THE SERVER
     // send data to server
     int w = write(server_socket, data, BUFFER_SIZE);
     // get reponse from server
