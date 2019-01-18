@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
   fgets(start, BUFFER_SIZE, stdin);
   printf("-----------------------------------------------------\n");
 
-	int board = makeboard();
+  int board[14] = {4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0};
   printboard(board);
   
   while (1) {
