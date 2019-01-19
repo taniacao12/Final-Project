@@ -3,7 +3,12 @@
 
 
 //int * editboard(int * board, char data[BUFFER_SIZE]){
-	 
+
+// char *stringify(int * n) {
+   // char *res = malloc(BUFFER_SIZE);
+   // snprintf(res, BUFFER_SIZE, "%ls", n);
+   // return res;
+// }
 
 int main(int argc, char **argv) {
   int server_socket;
@@ -104,8 +109,15 @@ int main(int argc, char **argv) {
 			}
 		}		
 	}
+
+	// char result[BUFFER_SIZE];
+	// strcpy(result, stringify(board));
+	// printf("%s", result);
 	
 	printboard(board);
+	
+
+	
 	// send data to server
     int w = write(server_socket, data, BUFFER_SIZE);
     // get reponse from server
