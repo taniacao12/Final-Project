@@ -16,6 +16,9 @@ void printboard (int * board) {
   printf("     A   B   C   D   E   F   \n"); 
 }
 
+//int * editboard(int * board, char data[BUFFER_SIZE]){
+	 
+
 int main(int argc, char **argv) {
   int server_socket;
   char buffer[BUFFER_SIZE];
@@ -51,12 +54,78 @@ int main(int argc, char **argv) {
     // get user input
     printf("Which cup would you like to choose? ");
     fgets(data, BUFFER_SIZE, stdin);
-    //WE NEED TO SEND BOTH THE BOARD AND THE ANSWER THAT THE PERSON CHOOSES TO THE SERVER
-    // send data to server
+    
+	//board = editboard(board, data);
+	//I'm writing this here b/c other function keeps breaking but I'll transfer later
+	int numinboard=0;
+	
+	if (*data == 'A'){
+		numinboard = board[0];
+		for (int i=0; i < numinboard+1; i++){
+			if (!i){board[0] -= numinboard;}
+			else{
+				board[i]+= 1;
+			}
+		}		
+	}
+	
+	else if (*data == 'B'){
+		numinboard = board[1];
+		for (int i=1; i < numinboard+2; i++){
+			if (i==1){board[1] -= numinboard;}
+			else{
+				board[i]+= 1;
+			}
+		}		
+	}
+	
+	else if (*data == 'C'){
+		numinboard = board[0];
+		for (int i=2; i < numinboard+3; i++){
+			if (i==2){board[2] -= numinboard;}
+			else{
+				board[i]+= 1;
+			}
+		}		
+	}
+	
+	else if (*data == 'D'){
+		int numinboard = board[0];
+		for (int i=3; i < numinboard+4; i++){
+			if (i==3){board[3] -= numinboard;}
+			else{
+				board[i]+= 1;
+			}
+		}		
+	}
+	
+	else if (*data == 'E'){
+		numinboard = board[0];
+		for (int i=4; i < numinboard+5; i++){
+			if (i==4){board[4] -= numinboard;}
+			else{
+				board[i]+= 1;
+			}
+		}		
+	}
+	
+	else if (*data == 'F'){
+		numinboard = board[0];
+		for (int i=5; i < numinboard+6; i++){
+			if (i==5){board[5] -= numinboard;}
+			else{
+				board[i]+= 1;
+			}
+		}		
+	}
+	
+	printboard(board);
+	// send data to server
     int w = write(server_socket, data, BUFFER_SIZE);
     // get reponse from server
     int r = read(server_socket, data, BUFFER_SIZE);
     // display response
     printf("%s", data);
   }
+
 }
