@@ -1,5 +1,8 @@
 void instructions(); // display instructions
 void printBoard(int * board); // display board
-int * makeBoard(); // make new board
-int * updateBoard(int bucket); // update board based on user input
+int convert(char bucket); // convert user bucket of choice into integer
+int * updateBoard(int bucket, int * board); // update board based on user input
 int * flipBoard(int board[]); // flip the board
+
+// might not be necessary unless we implement restart game
+int * makeBoard(); // make new board
