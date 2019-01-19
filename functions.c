@@ -27,12 +27,17 @@ int * updateBoard (char bucket, int * board) {
 }
 
 int flipBoard (int * board) {
-	int opp[7], user[7];
+	int opp[7], user[7], temp[14];
   for (int i = 0; i < 7 ; i++) {
     opp[i] = board[i+6];
     user[i] = board[i];
   }
-	board = opp.append(user);
+	for (int i = 0; i < 14 ; i++) {
+    if (i = 7)
+			temp[i] = user[i-7];
+		temp[i] = opp[i];
+	board = temp;
+	return board;
 }
 
 void printBoard (int * board) {

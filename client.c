@@ -26,9 +26,13 @@ int main(int argc, char **argv) {
   printf("WELCOME TO TEAMANCALA!\n");
   // get user name
   printf("What is your name? ");
-  fgets(user, BUFFER_SIZE, stdin);
-  user[strlen(user) - 1] = 0;
-  printf("Welcome %s\n", user);
+ 	fgets(user, BUFFER_SIZE, stdin);
+	user[strlen(user) - 1] = 0;
+  while (user == "") {
+		fgets(user, BUFFER_SIZE, stdin);
+		user[strlen(user) - 1] = 0;
+	}
+	printf("Welcome %s!\n", user);
   // give or skip game instructions
   instructions();  
   printf("Waiting for other player to join...\n");
