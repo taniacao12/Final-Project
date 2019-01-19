@@ -1,4 +1,4 @@
-#include "functions.h"
+#include "networking.h"
 
 void printboard (int * board) {
   int tempA[7], tempB[7];
@@ -12,6 +12,7 @@ void printboard (int * board) {
   for (int i = 0; i < 7; i++)
     printf("{%d} ", tempB[i]);
   printf("\n");
+  //printf("   A  B  C  D  E  F   \n"); 
 }
 
 void instructions() {

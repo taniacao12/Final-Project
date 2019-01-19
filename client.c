@@ -22,6 +22,8 @@ int main(int argc, char **argv) {
   printf("Welcome %s\n", user);
   // give or skip game instructions
   instructions();  
+  printf("Waiting for other player to join...\n");
+  
   printf("If you are ready, press ENTER to start the game.");
   fgets(start, BUFFER_SIZE, stdin);
   printf("-----------------------------------------------------\n");

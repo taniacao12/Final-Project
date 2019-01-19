@@ -9,37 +9,46 @@ static void sighandler(int signo) {
   }
 }
 
-void subserver(int from_client);
+void subserver(int player1, int player2);
 void process(char * name);
 
 int main() {
-  signal(SIGINT, sighandler);
-  int listen_socket;
-  int f;
-  listen_socket = server_setup();
+	signal(SIGINT, sighandler);
+	int listen_socket;
+	int f;
+	listen_socket = server_setup();
+	
+	while (1) {
+		printf("[server] waiting for connection...\n");
+		int player1; 
+		int player2;
+		
+		player1 = server_connect(listen_socket);
+		printf("[server] player1 connected... waiting for player2");
+		
+		player2= server_connect(listen_socket);
+		printf("[server] player2 connected!");
 
-
-  while (1) {
-
-    int client_socket = server_connect(listen_socket);
-    f = fork();
-    if (f == 0)
-      subserver(client_socket);
-    else
-      close(client_socket);
+	    f = fork();
+		if (f == 0)
+			subserver(player1, player2);
+		else{
+			close(player1);
+		}
+    //int client_socket = server_connect(listen_socket);
   }
 }
 
-void subserver(int client_socket) {
+void subserver(int player1, int player2) {
   char buffer[BUFFER_SIZE];
 
-  while (read(client_socket, buffer, sizeof(buffer))) {
+  while (read(player1, buffer, sizeof(buffer))) {
 
     printf("[subserver %d] received: [%s]\n", getpid(), buffer);
     process(buffer);
-    write(client_socket, buffer, sizeof(buffer));
+    write(player2, buffer, sizeof(buffer));
   }//end read loop
-  close(client_socket);
+  close(player1);
   exit(0);
 }
 
@@ -49,8 +58,8 @@ void process(char * s) {
       *s = ((*s - 'a') + 13) % 26 + 'a';
     else  if (*s >= 'A' && *s <= 'Z')
       *s = ((*s - 'a') + 13) % 26 + 'a';
-    s++;
-  }
+    s++;  
+	}
 }
 
 /*
