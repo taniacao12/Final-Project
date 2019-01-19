@@ -3,7 +3,6 @@
 
 
 //int * editboard(int * board, char data[BUFFER_SIZE]){
-
 // char *stringify(int * n) {
 // char *res = malloc(BUFFER_SIZE);
 // snprintf(res, BUFFER_SIZE, "%ls", n);

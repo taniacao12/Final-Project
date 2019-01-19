@@ -39,18 +39,14 @@ int * flipBoard (int * board) {
     board = temp;
     return board;
   }
+}
 
-  void printBoard (int * board) {
-    int user[7], opp[7];
-    for (int i = 0; i < 7 ; i++) {
-      user[i] = board[i+6];
-      opp[i] = board[i];
-    }
+ void printBoard (int * board) {
     for (int i = 6; i >= 0; i--)
-      printf("{%d} ", opp[i]);
+      printf("{%d} ", board[i]);
     printf("\n    ");
-    for (int i = 0; i < 7; i++)
-      printf("{%d} ", user[i]);
+    for (int i = 0; i < 14; i++)
+      printf("{%d} ", board[i]);
     printf("\n");
     printf("     A   B   C   D   E   F   \n"); 
   }
