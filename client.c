@@ -5,9 +5,9 @@
 //int * editboard(int * board, char data[BUFFER_SIZE]){
 
 // char *stringify(int * n) {
-   // char *res = malloc(BUFFER_SIZE);
-   // snprintf(res, BUFFER_SIZE, "%ls", n);
-   // return res;
+// char *res = malloc(BUFFER_SIZE);
+// snprintf(res, BUFFER_SIZE, "%ls", n);
+// return res;
 // }
 
 int main(int argc, char **argv) {
@@ -26,13 +26,13 @@ int main(int argc, char **argv) {
   printf("WELCOME TO TEAMANCALA!\n");
   // get user name
   printf("What is your name? ");
- 	fgets(user, BUFFER_SIZE, stdin);
-	user[strlen(user) - 1] = 0;
+  fgets(user, BUFFER_SIZE, stdin);
+  user[strlen(user) - 1] = 0;
   while (user == "") {
-		fgets(user, BUFFER_SIZE, stdin);
-		user[strlen(user) - 1] = 0;
-	}
-	printf("Welcome %s!\n", user);
+    fgets(user, BUFFER_SIZE, stdin);
+    user[strlen(user) - 1] = 0;
+  }
+  printf("Welcome %s!\n", user);
   // give or skip game instructions
   instructions();  
   printf("Waiting for other player to join...\n");
@@ -53,20 +53,20 @@ int main(int argc, char **argv) {
     printf("Which cup would you like to choose? ");
     fgets(data, BUFFER_SIZE, stdin);
 		
-		// board = updateBoard(board);
+    // board = updateBoard(board);
 
-		// char result[BUFFER_SIZE];
-		// strcpy(result, stringify(board));
-		// printf("%s", result);
+    // char result[BUFFER_SIZE];
+    // strcpy(result, stringify(board));
+    // printf("%s", result);
 	
-		printBoard(board);
+    printBoard(board);
 		
-		// send data to server
- 	   int w = write(server_socket, data, BUFFER_SIZE);
- 	   // get reponse from server
- 	   int r = read(server_socket, data, BUFFER_SIZE);
- 	   // display response
- 	   printf("%s", data);
+    // send data to server
+    int w = write(server_socket, data, BUFFER_SIZE);
+    // get reponse from server
+    int r = read(server_socket, data, BUFFER_SIZE);
+    // display response
+    printf("%s", data);
   }
-	return 0;
+  return 0;
 }
