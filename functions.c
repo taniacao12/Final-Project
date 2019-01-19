@@ -27,7 +27,7 @@ int * updateBoard (char bucket, int * board) {
 }
 
 int flipBoard (int * board) {
-	int tempA[7], tempB[7];
+	int opp[7], user[7];
   for (int i = 0; i < 7 ; i++) {
     opp[i] = board[i+6];
     user[i] = board[i];
