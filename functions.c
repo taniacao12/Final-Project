@@ -1,6 +1,25 @@
 #include "functions.h"
 #include "networking.h"
 
+char * printboard (int * board) {
+  //char * result;
+  //char snum[5]; //strcpy(snum[0], '{'); strcpy(snum[2], '}');
+  int tempA[7], tempB[7];
+  for (int i = 0; i < 7 ; i++) {
+    tempA[i] = board[i+6];
+    tempB[i] = board[i];
+  }
+  for (int i = 0; i < 7; i++)
+    //itoa(tempA[i], snum, 10);
+	//strcpy(result, tempA[i]
+	printf("{%d} ", tempA[i]);
+  printf("\n    ");
+  for (int i = 0; i < 7; i++)
+    printf("{%d} ", tempB[i]);
+  printf("\n");
+  printf("     A   B   C   D   E   F   \n"); 
+}
+
 void instructions() {
   char data[BUFFER_SIZE];
   printf("Do you want the game instructions? (y/n) ");
