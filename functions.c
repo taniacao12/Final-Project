@@ -1,19 +1,5 @@
+#include "functions.h"
 #include "networking.h"
-
-void printboard (int * board) {
-  int tempA[7], tempB[7];
-  for (int i = 0; i < 7 ; i++) {
-    tempA[i] = board[i+6];
-    tempB[i] = board[i];
-  }
-  for (int i = 0; i < 7; i++)
-    printf("{%d} ", tempA[i]);
-  printf("\n    ");
-  for (int i = 0; i < 7; i++)
-    printf("{%d} ", tempB[i]);
-  printf("\n");
-  //printf("   A  B  C  D  E  F   \n"); 
-}
 
 void instructions() {
   char data[BUFFER_SIZE];

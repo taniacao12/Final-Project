@@ -19,15 +19,14 @@ int main() {
 	listen_socket = server_setup();
 	
 	while (1) {
-		printf("[server] waiting for connection...\n");
 		int player1; 
 		int player2;
 		
 		player1 = server_connect(listen_socket);
-		printf("[server] player1 connected... waiting for player2");
+		printf("[server] player1 connected... waiting for player2\n");
 		
 		player2= server_connect(listen_socket);
-		printf("[server] player2 connected!");
+		printf("[server] player2 connected!\n");
 
 	    f = fork();
 		if (f == 0)
