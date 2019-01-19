@@ -3,11 +3,18 @@
 
 
 //int * editboard(int * board, char data[BUFFER_SIZE]){
-// char *stringify(int * n) {
-// char *res = malloc(BUFFER_SIZE);
-// snprintf(res, BUFFER_SIZE, "%ls", n);
-// return res;
-// }
+
+char * stringify(int n[]) {
+	char* output[14];
+	char c[14];
+	for (int i=0; i<14; ++i){
+		snprintf(c, sizeof(int), "%d", n[i]);
+		
+		output[i] = malloc(sizeof(c));
+		strcpy(output[i], c);
+	}
+	return *output;
+}
 
 int main(int argc, char **argv) {
   int server_socket;
@@ -40,6 +47,8 @@ int main(int argc, char **argv) {
   printf("%s\n", receive);
   
   printf("If you are ready, press ENTER to start the game.");
+  
+  
   fgets(start, BUFFER_SIZE, stdin);
   printf("-----------------------------------------------------\n");
 
@@ -47,21 +56,89 @@ int main(int argc, char **argv) {
   int board[14] = {4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0};
   printBoard(board);
   
+  //flip
+
   while (1) {
+	//first waits from a confirmation from the server that it can make its turn
+	int r0 = read(server_socket, data, BUFFER_SIZE);
+	
     // get user input
     printf("Which cup would you like to choose? ");
     fgets(data, BUFFER_SIZE, stdin);
-		
-    // board = updateBoard(board);
+  
+	//UPDATE BOARD
+	int numinboard=0;
+	if (*data == 'A'){
+		numinboard = board[0];
+		for (int i=0; i < numinboard+1; i++){
+			if (!i){board[0] -= numinboard;}
+			else{
+				board[i]+= 1;
+			}
+		}		
+	}
 
-    // char result[BUFFER_SIZE];
-    // strcpy(result, stringify(board));
-    // printf("%s", result);
+	else if (*data == 'B'){
+		numinboard = board[1];
+		for (int i=1; i < numinboard+2; i++){
+			if (i==1){board[1] -= numinboard;}
+			else{
+				board[i]+= 1;
+			}
+		}		
+	}
+
+	else if (*data == 'C'){
+		numinboard = board[0];
+		for (int i=2; i < numinboard+3; i++){
+			if (i==2){board[2] -= numinboard;}
+			else{
+				board[i]+= 1;
+			}
+		}		
+	}
+
+	else if (*data == 'D'){
+		int numinboard = board[0];
+		for (int i=3; i < numinboard+4; i++){
+			if (i==3){board[3] -= numinboard;}
+			else{
+				board[i]+= 1;
+			}
+		}		
+	}
+
+	else if (*data == 'E'){
+		numinboard = board[0];
+		for (int i=4; i < numinboard+5; i++){
+			if (i==4){board[4] -= numinboard;}
+			else{
+				board[i]+= 1;
+			}
+		}		
+	}
+
+	else if (*data == 'F'){
+		numinboard = board[0];
+		for (int i=5; i < numinboard+6; i++){
+			if (i==5){board[5] -= numinboard;}
+			else{
+				board[i]+= 1;
+			}
+		}		
+	}
 	
     printBoard(board);
-		
-    // send data to server
-    int w = write(server_socket, data, BUFFER_SIZE);
+
+	//STRINGIFY ALSO ISN'T WORKING FOR SOME REASON IDK
+    char result[BUFFER_SIZE];
+    strcpy(result, stringify(board));
+    printf("%s", result);
+	
+	
+    // sends the board to the server
+    int w = write(server_socket, result, BUFFER_SIZE);
+	
     // get reponse from server
     int r = read(server_socket, data, BUFFER_SIZE);
     // display response
