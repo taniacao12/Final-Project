@@ -39,8 +39,9 @@ int * flipBoard (int * board) {
     board = temp;
     return board;
   }
+}
 
-  void printBoard (int * board) {
+void printBoard (int * board) {
     int user[7], opp[7];
     for (int i = 0; i < 7 ; i++) {
       user[i] = board[i+6];
