@@ -10,6 +10,17 @@ int convert (char bucket) {
   return 0;
 }
 
+int interfy (char a) {
+	
+}
+
+char * stringify (int a) {
+	int length = snprintf (NULL, 0, "%d", a);
+	char* str = malloc( length + 1 );
+	snprintf (str, length + 1, "%d", a);
+	return str;
+}
+
 int * updateBoard (char bucket, int * board) {
   int cup = convert(bucket) + 7;
   int marbles = board[cup];
