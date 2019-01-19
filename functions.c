@@ -1,27 +1,17 @@
-void instructions(); // display instructions
-void printBoard(int board[]); // display board
-int makeBoard(); // make new board
-int updateBoard (int bucket); // update board based on user input
+#include "functions.h"
 
-int updateBoard (int bucket) {
-	return 0;
-}
-
-int makeboard() {
-  int board[14]; //board is just for the server, we're manually printing the game board
-  for (int i = 0; i < 14; i++){
-    if (i == 6 || i == 13)
-      board[i] = 0;
-    else
-      board[i] = 4;
+void printboard (int * board) {
+  int tempA[7], tempB[7];
+  for (int i = 0; i < 7 ; i++) {
+    tempA[i] = board[i+6];
+    tempB[i] = board[i];
   }
-  return board;
-}
-
-void printboard (int board[]) {
-  for (int i = 0; i < 14; i++)
-		printf("{%d} ", board[i]);
-	printf("\n");
+  for (int i = 0; i < 7; i++)
+    printf("{%d} ", tempA[i]);
+  printf("\n    ");
+  for (int i = 0; i < 7; i++)
+    printf("{%d} ", tempB[i]);
+  printf("\n");
 }
 
 void instructions() {

@@ -21,13 +21,12 @@ int main(int argc, char **argv) {
   user[strlen(user) - 1] = 0;
   printf("Welcome %s\n", user);
   // give or skip game instructions
-  instructions();
-  
+  instructions();  
   printf("If you are ready, press ENTER to start the game.");
   fgets(start, BUFFER_SIZE, stdin);
   printf("-----------------------------------------------------\n");
 
-	int board = makeboard();
+  int board[14] = {4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0};
   printboard(board);
   
   while (1) {
