@@ -2,31 +2,31 @@
 #include "networking.h"
 
 int convert (char bucket) {
-	char alpha[] = {"A", "B", "C", "D", "E", "F"}
+	char alpha[] = {'A', 'B', 'C', 'D', 'E', 'F'};
 	for (int i = 0; i < 6; i++) {
-		if (bucket == alpha[i]
+		if (bucket == alpha[i])
 			return i;
 	}
 	return 0;
 }
 
 int * updateBoard (char bucket, int * board) {
-	cup = convert(bucket) + 7;
+	int cup = convert(bucket) + 7;
 	int marbles = board[cup];
-	for (i = cup; i < 14; i++) {
+	for (int i = cup; i < 14; i++) {
 		if (i = cup)
 			board[i] = 0;
-		else if (marbles > 0 && i != 6) {
+		else if (marbles > 0) {
 			board[i]++;
 			marbles--;
-			if (marbles > 0 && i == 14)
+			if (marbles > 0 && i == 6)
 				i = 0;
 		}
 	}
 	return board;
 }
 
-int flipBoard (int * board) {
+int * flipBoard (int * board) {
 	int opp[7], user[7];
   for (int i = 0; i < 7 ; i++) {
     opp[i] = board[i+6];

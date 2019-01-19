@@ -55,7 +55,7 @@ int main(int argc, char **argv) {
 		// strcpy(result, stringify(board));
 		// printf("%s", result);
 	
-		printboard(board);
+		printBoard(board);
 		
 		// send data to server
  	   int w = write(server_socket, data, BUFFER_SIZE);
