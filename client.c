@@ -1,9 +1,6 @@
 #include "networking.h"
 #include "functions.c"
 
-
-//int * editboard(int * board, char data[BUFFER_SIZE]){
-
 char * stringify(int n[]) {
 	char* output[14];
 	char c[14];
@@ -133,16 +130,17 @@ int main(int argc, char **argv) {
 	//STRINGIFY ALSO ISN'T WORKING FOR SOME REASON IDK
     char result[BUFFER_SIZE];
     strcpy(result, stringify(board));
-    printf("%s", result);
-	
-	
+		
     // sends the board to the server
     int w = write(server_socket, result, BUFFER_SIZE);
 	
-    // get reponse from server
-    int r = read(server_socket, data, BUFFER_SIZE);
-    // display response
-    printf("%s", data);
+    // gets the other player's board back from server
+    int r = read(server_socket, result, BUFFER_SIZE);
+    
+	//converts the string back into an array
+
+	//prints the other player's move
+	printBoard(result);
   }
   return 0;
 }

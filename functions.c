@@ -39,10 +39,17 @@ int * updateBoard (char bucket, int * board) {
       board[i]++;
       marbles--;
       if (marbles > 0 && i == 6)
-	i = 0;
+				i = 0;
     }
   }
   return board;
+}
+
+char * stringify (int a) {
+  int length = snprintf (NULL, 0, "%d", a);
+  char* str = malloc( length + 1 );
+  snprintf (str, length + 1, "%d", a);
+  return str;
 }
 
 int * flipBoard (int * board) {
@@ -61,25 +68,14 @@ int * flipBoard (int * board) {
 }
 
 
-void printBoard (int * board) {
-  //char * result;
-  //char snum[5]; //strcpy(snum[0], '{'); strcpy(snum[2], '}');
-  int tempA[7], tempB[7];
-  int w=13;
-  for (int i = 0; i < 7 ; i++) {
-    tempB[i] = board[i]; 
-	tempA[i] = board[w];
-	w--;
-  }
-  for (int i = 0; i < 7; i++)
-    //itoa(tempA[i], snum, 10);
-	//strcpy(result, tempA[i]
-	printf("{%d} ", tempA[i]);
+void printBoardB (int * board) {
+  for (int i = 6; i >= 0; i--)
+    printf("{%d} ", board[i]);
   printf("\n    ");
   for (int i = 0; i < 7; i++)
-    printf("{%d} ", tempB[i]);
+    printf("{%d} ", board[i]);
   printf("\n");
-  printf("     A   B   C   D   E   F   \n"); 
+	printf("     A   B   C   D   E   F   \n"); 
 }
 
 void instructions() {
@@ -118,3 +114,4 @@ void instructions() {
     return;
   else instructions();
 }
+

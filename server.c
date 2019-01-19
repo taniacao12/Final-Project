@@ -1,5 +1,6 @@
 #include <sys/socket.h>
 #include "networking.h"
+#include "functions.h"
 
 static void sighandler(int signo) {
   if (signo == SIGINT) {
@@ -50,24 +51,30 @@ void subserver(int player1, int player2) {
 	//permits player1 to play
 	write(player1, buffer, sizeof(buffer));
 	
-	while (read(player1, buffer, sizeof(buffer))) {
+	//gets player1's board response (a string instead of an array)
+	read(player1, buffer, sizeof(buffer));
+	printf("[subserver %d] received: [%s]\n", getpid(), buffer);
+	
+    //sends the string to player two 	
+	//permits player2 to play
+	write(player2, buffer, sizeof(buffer));
+	
+	//gets player2's board response (a string instead of an array)
+	read(player2, buffer, sizeof(buffer));
+	printf("[subserver %d] received: [%s]\n", getpid(), buffer);
+	
+    // //sends the updated, processed board to player 2 so they can print it
+		// write(player2, buffer, sizeof(buffer));
+	
+		// while (read(player2, buffer, sizeof(buffer))) {
 
-    printf("[subserver %d] received: [%s]\n", getpid(), buffer);
-    process(buffer);
-    write(player2, buffer, sizeof(buffer));
-  
-  }
+			// printf("[subserver %d] received: [%s]\n", getpid(), buffer);
+			// //process(buffer);
+		
+			// //sends the updated, processed board to player 2 so they can print it
+			// write(player2, buffer, sizeof(buffer));
+ 
   close(player1);
+  close(player2);
   exit(0);
-}
-
-//process is converting it back into an array
-void process(char * s) {
-  while (*s) {
-    if (*s >= 'a' && *s <= 'z')
-      *s = ((*s - 'a') + 13) % 26 + 'a';
-    else  if (*s >= 'A' && *s <= 'Z')
-      *s = ((*s - 'a') + 13) % 26 + 'a';
-    s++;  
-  }
-}
+		}
