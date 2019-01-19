@@ -28,6 +28,7 @@ int main(int argc, char **argv) {
   fgets(start, BUFFER_SIZE, stdin);
   printf("-----------------------------------------------------\n");
 
+  //board created to send to server
   int board[14] = {4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0};
   printboard(board);
   
