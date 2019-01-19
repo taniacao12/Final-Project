@@ -13,7 +13,7 @@ void printboard (int * board) {
   for (int i = 0; i < 7; i++)
     printf("{%d} ", tempB[i]);
   printf("\n");
-  //printf("   A  B  C  D  E  F   \n"); 
+  printf("     A   B   C   D   E   F   \n"); 
 }
 
 int main(int argc, char **argv) {
