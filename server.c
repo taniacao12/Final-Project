@@ -27,7 +27,13 @@ int main() {
 		
 		player2= server_connect(listen_socket);
 		printf("[server] player2 connected!\n");
-
+		char send[100];
+		char send1[100];
+		strcpy(send, "player 2 connected!\n");
+		write(player1, send, 100);
+		strcpy(send1, "connected!\n");
+		write(player2, send1, 100);
+		
 	    f = fork();
 		if (f == 0)
 			subserver(player1, player2);

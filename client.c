@@ -32,6 +32,9 @@ int main(int argc, char **argv) {
   // give or skip game instructions
   instructions();  
   printf("Waiting for other player to join...\n");
+  char receive[100];
+  read(server_socket, receive, 100);
+  printf("%s\n", receive);
   
   printf("If you are ready, press ENTER to start the game.");
   fgets(start, BUFFER_SIZE, stdin);
