@@ -1,6 +1,13 @@
 #include "functions.h"
 #include "networking.h"
 
+// char * stringify (int a) {
+	// int length = snprintf (NULL, 0, "%d", a);
+	// char* str = malloc( length + 1 );
+	// snprintf (str, length + 1, "%d", a);
+	// return str;
+// }
+
 int * flipBoard (int * board) {
   int opp[7], user[7], temp[14];
   for (int i = 0; i < 7 ; i++) {
@@ -74,3 +81,4 @@ void instructions() {
     return;
   else instructions();
 }
+
