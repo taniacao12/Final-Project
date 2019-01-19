@@ -2,24 +2,24 @@
 #include "networking.h"
 
 int convert (char bucket) {
-	char alpha[] = {"A", "B", "C", "D", "E", "F"}
+	char alpha[] = {'A', 'B', 'C', 'D', 'E', 'F'};
 	for (int i = 0; i < 6; i++) {
-		if (bucket == alpha[i]
+		if (bucket == alpha[i])
 			return i;
 	}
 	return 0;
 }
 
 int * updateBoard (char bucket, int * board) {
-	cup = convert(bucket) + 7;
+	int cup = convert(bucket) + 7;
 	int marbles = board[cup];
-	for (i = cup; i < 14; i++) {
+	for (int i = cup; i < 14; i++) {
 		if (i = cup)
 			board[i] = 0;
-		else if (marbles > 0 && i != 6) {
+		else if (marbles > 0) {
 			board[i]++;
 			marbles--;
-			if (marbles > 0 && i == 14)
+			if (marbles > 0 && i == 6)
 				i = 0;
 		}
 	}
