@@ -26,15 +26,22 @@ int * updateBoard (char bucket, int * board) {
 	return board;
 }
 
-
+int flipBoard (int * board) {
+	int tempA[7], tempB[7];
+  for (int i = 0; i < 7 ; i++) {
+    opp[i] = board[i+6];
+    user[i] = board[i];
+  }
+	
+}
 
 void printBoard (int * board) {
-  int tempA[7], tempB[7];
+  int user[7], opp[7];
   for (int i = 0; i < 7 ; i++) {
     user[i] = board[i+6];
     opp[i] = board[i];
   }
-  for (int i = 0; i < 7; i++)
+  for (int i = 6; i >= 0; i--)
   	printf("{%d} ", opp[i]);
   printf("\n    ");
   for (int i = 0; i < 7; i++)
