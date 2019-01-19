@@ -16,10 +16,10 @@ int * updateBoard (char bucket, int * board) {
 	for (i = cup; i < 14; i++) {
 		if (i = cup)
 			board[i] = 0;
-		else if (marbles > 0) {
+		else if (marbles > 0 && i != 6) {
 			board[i]++;
 			marbles--;
-			if (marbles > 0 && i == 6)
+			if (marbles > 0 && i == 14)
 				i = 0;
 		}
 	}
@@ -32,7 +32,7 @@ int flipBoard (int * board) {
     opp[i] = board[i+6];
     user[i] = board[i];
   }
-	
+	board = opp.append(user);
 }
 
 void printBoard (int * board) {
