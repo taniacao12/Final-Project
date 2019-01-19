@@ -1,42 +1,6 @@
 #include "functions.h"
 #include "networking.h"
 
-int convert (char bucket) {
-  char alpha[] = {'A', 'B', 'C', 'D', 'E', 'F'};
-  for (int i = 0; i < 6; i++) {
-    if (bucket == alpha[i])
-      return i;
-  }
-  return 0;
-}
-
-int interfy (char a) {
-	
-}
-
-char * stringify (int a) {
-	int length = snprintf (NULL, 0, "%d", a);
-	char* str = malloc( length + 1 );
-	snprintf (str, length + 1, "%d", a);
-	return str;
-}
-
-int * updateBoard (char bucket, int * board) {
-  int cup = convert(bucket) + 7;
-  int marbles = board[cup];
-  for (int i = cup; i < 14; i++) {
-    if (i = cup)
-      board[i] = 0;
-    else if (marbles > 0) {
-      board[i]++;
-      marbles--;
-      if (marbles > 0 && i == 6)
-	i = 0;
-    }
-  }
-  return board;
-}
-
 int * flipBoard (int * board) {
   int opp[7], user[7], temp[14];
   for (int i = 0; i < 7 ; i++) {
@@ -52,12 +16,24 @@ int * flipBoard (int * board) {
   }
 }
 
+
 void printBoard (int * board) {
-  for (int i = 6; i >= 0; i--)
-    printf("{%d} ", board[i]);
+  //char * result;
+  //char snum[5]; //strcpy(snum[0], '{'); strcpy(snum[2], '}');
+  int tempA[7], tempB[7];
+  int w=13;
+  for (int i = 0; i < 7 ; i++) {
+    tempB[i] = board[i]; 
+	tempA[i] = board[w];
+	w--;
+  }
+  for (int i = 0; i < 7; i++)
+    //itoa(tempA[i], snum, 10);
+	//strcpy(result, tempA[i]
+	printf("{%d} ", tempA[i]);
   printf("\n    ");
-  for (int i = 0; i < 14; i++)
-    printf("{%d} ", board[i]);
+  for (int i = 0; i < 7; i++)
+    printf("{%d} ", tempB[i]);
   printf("\n");
   printf("     A   B   C   D   E   F   \n"); 
 }
