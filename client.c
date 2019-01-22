@@ -64,6 +64,7 @@ int main(int argc, char **argv) {
     fgets(data, BUFFER_SIZE, stdin);
   
     //UPDATE BOARD
+    /*updateBoard(*data, board);*/
     int numinboard=0;
     if (*data == 'A'){
       numinboard = board[0];
@@ -129,7 +130,7 @@ int main(int argc, char **argv) {
 
     //STRINGIFY ALSO ISN'T WORKING FOR SOME REASON IDK
     char result[BUFFER_SIZE];
-    //strcpy(result, stringify(board));
+    strcpy(result, stringify(board));
 		
     // sends the board to the server
     int w = write(server_socket, result, BUFFER_SIZE);
@@ -138,9 +139,10 @@ int main(int argc, char **argv) {
     int r = read(server_socket, result, BUFFER_SIZE);
     
     //converts the string back into an array
-    //board = interfy(result);
+    for (int i = 0; i < 14; i++)    
+      board[i] = interfy(result[i]);
     //prints the other player's move
-    //printBoard(board);
+    printBoard(board);
   }
   return 0;
 }
