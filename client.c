@@ -1,7 +1,7 @@
 #include "networking.h"
 #include "functions.c"
 
-int main() {
+int main(int argc, char ** argv) {
   int server_socket;
   char buffer[BUFFER_SIZE];
   char data[BUFFER_SIZE];
@@ -23,7 +23,7 @@ int main() {
     fgets(user, BUFFER_SIZE, stdin);
     user[strlen(user) - 1] = 0;
   }
-  printf("Welcome %s!\n", user);
+  printf("Hi %s!\n", user);
   // give or skip game instructions
   instructions();  
   printf("Waiting for other player to join...\n");
@@ -37,28 +37,28 @@ int main() {
 
   // board created to send to server
   int board[14] = {4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0};
-  
-  print(board);
-  
+
   while (1) {
     // player A waits for confirmation from the server to start
     int r0 = read(server_socket, data, BUFFER_SIZE);
 	
     // get player A user input
+    print(board);
     printf("Which cup would you like to choose? ");
     fgets(data, BUFFER_SIZE, stdin);
   
     // update board based on player A's input
-    update(data, board);
+    update(*data, board);
     print(board);
+    printf("-----------------------------------------------------\n");
 
     // flip the results so it matches the orientation of the opponent
     flip(board);
-    
+
     // convert results (board data) into a string
     char results[BUFFER_SIZE];
-    stringify(results, board));
-    
+    stringify(results, board);
+
     // send string to the server
     int w = write(server_socket, results, BUFFER_SIZE);
 	
@@ -67,7 +67,6 @@ int main() {
     
     // convert player B's string results back into an array
     listify(results, board);
-    printBoard(board);
   }
   return 0;
 }

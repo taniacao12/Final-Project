@@ -19,20 +19,20 @@ void stringify (char * string, int * board) {
   sprintf(string, "%d%d%d%d%d%d%d%d%d%d%d%d%d%d", board[0], board[1], board[2], board[3], board[4], board[5], board[6], board[7], board[8], board[9], board[10], board[11], board[12], board[13]);
 }
 
-void flip (it * board) {
+void flip (int * board) {
   int temp[14];
   for (int i = 0; i < 14; i++) {
     if (i > 6)
-      temp[i] = board[i + 7];
-    else
       temp[i] = board[i - 7];
+    else
+      temp[i] = board[i + 7];
   }
   for (int i = 0; i < 14; i++)
     board[i] = temp[i];
 }
 
 void update (char bucket, int * board) {
-  int cup = convert(bucket);
+  int cup = convert(bucket) + 7;
   for (int i = cup; i < 14 && board[cup] > 0; i++) {
     board[i] += 1;
     board[cup] -= 1;
@@ -49,6 +49,10 @@ void print (int * board) {
     printf("{%d} ", board[i]);
   printf("\n");
   printf("     A   B   C   D   E   F   \n"); 
+}
+
+void turn() {
+
 }
 
 void instructions() {
