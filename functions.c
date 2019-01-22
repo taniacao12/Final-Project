@@ -11,23 +11,23 @@ int convert (char bucket) {
 }
 
 /*int * interfy (char * board) {
-	int * b[14];
-	for (int i = 0; i < 14; i++) {
-		b[i] = board[i] - '0';
-	}
-	return b;
-}*/
+  int * b[14];
+  for (int i = 0; i < 14; i++) {
+  b[i] = board[i] - '0';
+  }
+  return b;
+  }*/
 
 /*char * stringify (int * board) {
-	char b[14];
-	for (int i = 0; i < 14; i++) {
-		int length = snprintf (NULL, 0, "%d", board[i]);
-		char* str = malloc( length + 1 );
-		snprintf (str, length + 1, "%d", board[i]);
-		b[i] = str;
-	}
-	return b;
-}*/
+  char b[14];
+  for (int i = 0; i < 14; i++) {
+  int length = snprintf (NULL, 0, "%d", board[i]);
+  char* str = malloc( length + 1 );
+  snprintf (str, length + 1, "%d", board[i]);
+  b[i] = str;
+  }
+  return b;
+  }*/
 
 int * updateBoard (char bucket, int * board) {
   int cup = convert(bucket) + 7;
@@ -39,7 +39,7 @@ int * updateBoard (char bucket, int * board) {
       board[i]++;
       marbles--;
       if (marbles > 0 && i == 6)
-				i = 0;
+	i = 0;
     }
   }
   return board;
@@ -50,7 +50,7 @@ int * updateBoard (char bucket, int * board) {
   char* str = malloc( length + 1 );
   snprintf (str, length + 1, "%d", a);
   return str;
-}*/
+  }*/
 
 int * flipBoard (int * board) {
   int opp[7], user[7], temp[14];
@@ -75,7 +75,7 @@ void printBoardB (int * board) {
   for (int i = 0; i < 7; i++)
     printf("{%d} ", board[i]);
   printf("\n");
-	printf("     A   B   C   D   E   F   \n"); 
+  printf("     A   B   C   D   E   F   \n"); 
 }
 
 void instructions() {

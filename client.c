@@ -2,16 +2,16 @@
 #include "functions.c"
 
 /*char * stringify(int n[]) {
-	char* output[14];
-	char c[14];
-	for (int i=0; i<14; ++i){
-		snprintf(c, sizeof(int), "%d", n[i]);
+  char* output[14];
+  char c[14];
+  for (int i=0; i<14; ++i){
+  snprintf(c, sizeof(int), "%d", n[i]);
 		
-		output[i] = malloc(sizeof(c));
-		strcpy(output[i], c);
-	}
-	return *output;
-}*/
+  output[i] = malloc(sizeof(c));
+  strcpy(output[i], c);
+  }
+  return *output;
+  }*/
 
 int main(int argc, char **argv) {
   int server_socket;
@@ -51,85 +51,85 @@ int main(int argc, char **argv) {
 
   //board created to send to server
   int board[14] = {4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0};
-  //printBoard(board);
+  printBoard(board);
   
   //flip
 
   while (1) {
-	//first waits from a confirmation from the server that it can make its turn
-	int r0 = read(server_socket, data, BUFFER_SIZE);
+    //first waits from a confirmation from the server that it can make its turn
+    int r0 = read(server_socket, data, BUFFER_SIZE);
 	
     // get user input
     printf("Which cup would you like to choose? ");
     fgets(data, BUFFER_SIZE, stdin);
   
-	//UPDATE BOARD
-	int numinboard=0;
-	if (*data == 'A'){
-		numinboard = board[0];
-		for (int i=0; i < numinboard+1; i++){
-			if (!i){board[0] -= numinboard;}
-			else{
-				board[i]+= 1;
-			}
-		}		
+    //UPDATE BOARD
+    int numinboard=0;
+    if (*data == 'A'){
+      numinboard = board[0];
+      for (int i=0; i < numinboard+1; i++){
+	if (!i){board[0] -= numinboard;}
+	else{
+	  board[i]+= 1;
 	}
+      }		
+    }
 
-	else if (*data == 'B'){
-		numinboard = board[1];
-		for (int i=1; i < numinboard+2; i++){
-			if (i==1){board[1] -= numinboard;}
-			else{
-				board[i]+= 1;
-			}
-		}		
+    else if (*data == 'B'){
+      numinboard = board[1];
+      for (int i=1; i < numinboard+2; i++){
+	if (i==1){board[1] -= numinboard;}
+	else{
+	  board[i]+= 1;
 	}
+      }		
+    }
 
-	else if (*data == 'C'){
-		numinboard = board[0];
-		for (int i=2; i < numinboard+3; i++){
-			if (i==2){board[2] -= numinboard;}
-			else{
-				board[i]+= 1;
-			}
-		}		
+    else if (*data == 'C'){
+      numinboard = board[0];
+      for (int i=2; i < numinboard+3; i++){
+	if (i==2){board[2] -= numinboard;}
+	else{
+	  board[i]+= 1;
 	}
+      }		
+    }
 
-	else if (*data == 'D'){
-		int numinboard = board[0];
-		for (int i=3; i < numinboard+4; i++){
-			if (i==3){board[3] -= numinboard;}
-			else{
-				board[i]+= 1;
-			}
-		}		
+    else if (*data == 'D'){
+      int numinboard = board[0];
+      for (int i=3; i < numinboard+4; i++){
+	if (i==3){board[3] -= numinboard;}
+	else{
+	  board[i]+= 1;
 	}
+      }		
+    }
 
-	else if (*data == 'E'){
-		numinboard = board[0];
-		for (int i=4; i < numinboard+5; i++){
-			if (i==4){board[4] -= numinboard;}
-			else{
-				board[i]+= 1;
-			}
-		}		
+    else if (*data == 'E'){
+      numinboard = board[0];
+      for (int i=4; i < numinboard+5; i++){
+	if (i==4){board[4] -= numinboard;}
+	else{
+	  board[i]+= 1;
 	}
+      }		
+    }
 
-	else if (*data == 'F'){
-		numinboard = board[0];
-		for (int i=5; i < numinboard+6; i++){
-			if (i==5){board[5] -= numinboard;}
-			else{
-				board[i]+= 1;
-			}
-		}		
+    else if (*data == 'F'){
+      numinboard = board[0];
+      for (int i=5; i < numinboard+6; i++){
+	if (i==5){board[5] -= numinboard;}
+	else{
+	  board[i]+= 1;
 	}
+      }		
+    }
 	
-    //printBoard(board);
+    printBoard(board);
 
-	//STRINGIFY ALSO ISN'T WORKING FOR SOME REASON IDK
+    //STRINGIFY ALSO ISN'T WORKING FOR SOME REASON IDK
     char result[BUFFER_SIZE];
-//    strcpy(result, stringify(board));
+    //strcpy(result, stringify(board));
 		
     // sends the board to the server
     int w = write(server_socket, result, BUFFER_SIZE);
@@ -137,10 +137,10 @@ int main(int argc, char **argv) {
     // gets the other player's board back from server
     int r = read(server_socket, result, BUFFER_SIZE);
     
-	//converts the string back into an array
-	//board = interfy(result);
-	//prints the other player's move
-	//printBoard(board);
+    //converts the string back into an array
+    //board = interfy(result);
+    //prints the other player's move
+    //printBoard(board);
   }
   return 0;
 }
