@@ -14,6 +14,13 @@ int interfy (char a) {
   return a - '0';
 }
 
+char * stringifyA (int a) {
+  int length = snprintf (NULL, 0, "%d", a);
+  char* str = malloc( length + 1 );
+  snprintf (str, length + 1, "%d", a);
+  return str;
+}
+
 char * stringify (int * board) {
   char * b[14];
   for (int i = 0; i < 14; i++)
@@ -24,21 +31,14 @@ char * stringify (int * board) {
 /*int * updateBoard (char bucket, int board[14]) {
   int cup = convert(bucket) + 7;
   for (int i = cup; i < 14 && board[cup] > 0; i++) {
-    printf("i = %d\n", i);
-    board[cup]--;
-    if (i != 6)
-      board[i]++;
-    printBoard(board);
+  printf("i = %d\n", i);
+  board[cup]--;
+  if (i != 6)
+  board[i]++;
+  printBoard(board);
   }
   return board;
-}*/
-
-char * stringifyA (int a) {
-  int length = snprintf (NULL, 0, "%d", a);
-  char* str = malloc( length + 1 );
-  snprintf (str, length + 1, "%d", a);
-  return str;
-}
+  }*/
 
 int * flipBoard (int * board) {
   int opp[7], user[7], temp[14];
@@ -54,7 +54,6 @@ int * flipBoard (int * board) {
     return board;
   }
 }
-
 
 void printBoard (int * board) {
   for (int i = 6; i >= 0; i--)

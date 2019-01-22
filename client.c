@@ -65,7 +65,15 @@ int main(int argc, char **argv) {
   
     //UPDATE BOARD
     /*updateBoard(*data, board);*/
-    int numinboard=0;
+    int cup = convert(data) + 7;
+    for (int i = cup; i < 14 && board[cup] > 0; i++) {
+      printf("i = %d\n", i);
+      board[cup]--;
+      if (i != 6)
+      board[i]++;
+      printBoard(board);
+    }
+    /*int numinboard=0;
     if (*data == 'A'){
       numinboard = board[0];
       for (int i=0; i < numinboard+1; i++){
@@ -125,7 +133,7 @@ int main(int argc, char **argv) {
 	}
       }		
     }
-	
+    */
     printBoard(board);
 
     //STRINGIFY ALSO ISN'T WORKING FOR SOME REASON IDK
