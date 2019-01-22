@@ -10,24 +10,24 @@ int convert (char bucket) {
   return 0;
 }
 
-int * interfy (char * board) {
+/*int * interfy (char * board) {
 	int * b[14];
 	for (int i = 0; i < 14; i++) {
 		b[i] = board[i] - '0';
 	}
 	return b;
-}
+}*/
 
-char * stringify (int * board) {
+/*char * stringify (int * board) {
 	char b[14];
 	for (int i = 0; i < 14; i++) {
-		int length = snprintf (NULL, 0, '%d', board[i]);
+		int length = snprintf (NULL, 0, "%d", board[i]);
 		char* str = malloc( length + 1 );
-		snprintf (str, length + 1, '%d', board[i]);
+		snprintf (str, length + 1, "%d", board[i]);
 		b[i] = str;
 	}
 	return b;
-}
+}*/
 
 int * updateBoard (char bucket, int * board) {
   int cup = convert(bucket) + 7;
@@ -45,12 +45,12 @@ int * updateBoard (char bucket, int * board) {
   return board;
 }
 
-char * stringify (int a) {
+/*char * stringify (int a) {
   int length = snprintf (NULL, 0, "%d", a);
   char* str = malloc( length + 1 );
   snprintf (str, length + 1, "%d", a);
   return str;
-}
+}*/
 
 int * flipBoard (int * board) {
   int opp[7], user[7], temp[14];

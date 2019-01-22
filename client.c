@@ -1,7 +1,7 @@
 #include "networking.h"
 #include "functions.c"
 
-char * stringify(int n[]) {
+/*char * stringify(int n[]) {
 	char* output[14];
 	char c[14];
 	for (int i=0; i<14; ++i){
@@ -11,7 +11,7 @@ char * stringify(int n[]) {
 		strcpy(output[i], c);
 	}
 	return *output;
-}
+}*/
 
 int main(int argc, char **argv) {
   int server_socket;
@@ -51,7 +51,7 @@ int main(int argc, char **argv) {
 
   //board created to send to server
   int board[14] = {4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0};
-  printBoard(board);
+  //printBoard(board);
   
   //flip
 
@@ -125,11 +125,11 @@ int main(int argc, char **argv) {
 		}		
 	}
 	
-    printBoard(board);
+    //printBoard(board);
 
 	//STRINGIFY ALSO ISN'T WORKING FOR SOME REASON IDK
     char result[BUFFER_SIZE];
-    strcpy(result, stringify(board));
+//    strcpy(result, stringify(board));
 		
     // sends the board to the server
     int w = write(server_socket, result, BUFFER_SIZE);
@@ -138,9 +138,9 @@ int main(int argc, char **argv) {
     int r = read(server_socket, result, BUFFER_SIZE);
     
 	//converts the string back into an array
-
+	//board = interfy(result);
 	//prints the other player's move
-	printBoard(result);
+	//printBoard(board);
   }
   return 0;
 }
