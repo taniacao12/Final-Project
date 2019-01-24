@@ -26,8 +26,9 @@ void flip (int * board) {
   for (int i = 0; i < 14; i++) {
     if (i > 6)
       temp[i] = board[i - 7];
-    else
+    else{
       temp[i] = board[i + 7];
+	}
   }
   for (int i = 0; i < 14; i++)
     board[i] = temp[i];

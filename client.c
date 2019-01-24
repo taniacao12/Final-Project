@@ -37,19 +37,26 @@ int main(int argc, char ** argv) {
 
   // board created to send to server
   int board[14] = {4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0};
-
+  int sum = 0;
+  
   while (1) {
     // player waits for confirmation from the server to start
     int r0 = read(server_socket, data, BUFFER_SIZE);
 
 	//sees whose turn it is
 	if (data[0] == 'h'){
-		printf("");
+		printf("\n");
 	} else {
 		// listify the string 
 		listify(data, board);
+		sum = 0;
+		for (int n=8; n<14; n++){
+			sum += board[n];
+		} 
+		if (!sum){
+			printf("GAME OVER");}
 	} 
-	 
+			
     // get player A's user input
     print(board);
     printf("Which cup would you like to choose? ");
