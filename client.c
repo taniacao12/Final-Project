@@ -39,10 +39,18 @@ int main(int argc, char ** argv) {
   int board[14] = {4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0};
 
   while (1) {
-    // player A waits for confirmation from the server to start
+    // player waits for confirmation from the server to start
     int r0 = read(server_socket, data, BUFFER_SIZE);
-	
-    // get player A user input
+
+	//sees whose turn it is
+	if (data[0] == 'h'){
+		printf("");
+	} else {
+		// listify the string 
+		listify(data, board);
+	} 
+	 
+    // get player A's user input
     print(board);
     printf("Which cup would you like to choose? ");
     fgets(data, BUFFER_SIZE, stdin);
@@ -50,7 +58,7 @@ int main(int argc, char ** argv) {
     // update board based on player A's input
     update(*data, board);
     print(board);
-    printf("-----------------------------------------------------\n");
+    //printf("-----------------------------------------------------\n");
 
     // flip the results so it matches the orientation of the opponent
     flip(board);
@@ -63,10 +71,10 @@ int main(int argc, char ** argv) {
     int w = write(server_socket, results, BUFFER_SIZE);
 	
     // wait for and recieve player B's results from server
-    int r = read(server_socket, results, BUFFER_SIZE);
+    //int r = read(server_socket, results, BUFFER_SIZE);
     
     // convert player B's string results back into an array
-    listify(results, board);
+    //listify(results, board);
   }
   return 0;
 }

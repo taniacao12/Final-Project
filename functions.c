@@ -11,8 +11,10 @@ int convert (char bucket) {
 }
 
 void listify (char * string, int * board) {
-  for (int i = 0; i < 14; i++)
+  for (int i = 0; i < 14; i++){
+	//printf("board[%d]: %d\n", i, (string[i] - '0'));
     board[i] = string[i] - '0';
+	}
 }
 
 void stringify (char * string, int * board) {
