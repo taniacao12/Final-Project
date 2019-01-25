@@ -3,85 +3,66 @@
 
 int main(int argc, char ** argv) {
   int server_socket;
-  char buffer[BUFFER_SIZE];
-  char data[BUFFER_SIZE];
-  char user[BUFFER_SIZE];
-  char start[BUFFER_SIZE];
+  int start = 0; // has the game started? 0 = false, 1 = true
+  char input[BUFFER_SIZE]; // user input
+  char data[BUFFER_SIZE]; // data received from server
 
   if (argc == 2)
     server_socket = client_setup( argv[1]);
   else
     server_socket = client_setup( TEST_IP );
 
-  // welcome user and get their username
+  // welcome user and give or skip instructions
   printf("WELCOME TO TEAMANCALA!\n");
-  // get user name
-  printf("What is your name? ");
-  fgets(user, BUFFER_SIZE, stdin);
-  user[strlen(user) - 1] = 0;
-  while (user == "") {
-    fgets(user, BUFFER_SIZE, stdin);
-    user[strlen(user) - 1] = 0;
-  }
-  printf("Hi %s!\n", user);
-  // give or skip game instructions
-  instructions();  
+  instructions();
+  
+  // conncect user to server and wait for other player
   printf("Waiting for other player to join...\n");
   char receive[100];
   read(server_socket, receive, 100);
   printf("%s\n", receive);
   
-  printf("If you are ready, press ENTER to start the game.");  
-  fgets(start, BUFFER_SIZE, stdin);
-  printf("-----------------------------------------------------\n");
-
-  // board created to send to server
-  int board[14] = {4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0};
-  int sum = 0;
+  // start game if user is ready
+  start = game();
+  int board[14];
   
-  while (1) {
+  while (start == 1) {
     // player waits for confirmation from the server to start
-    int r0 = read(server_socket, data, BUFFER_SIZE);
+    read(server_socket, data, BUFFER_SIZE);
 
-	//sees whose turn it is
-	if (data[0] == 'h'){
-		printf("\n");
-	} else {
-		// listify the string 
-		listify(data, board);
-		sum = 0;
-		for (int n=8; n<14; n++){
-			sum += board[n];
-		} 
-		if (!sum){
-			printf("GAME OVER");}
-	} 
-			
-    // get player A's user input
-    print(board);
-    printf("Which cup would you like to choose? ");
-    fgets(data, BUFFER_SIZE, stdin);
-  
-    // update board based on player A's input
-    update(*data, board);
-    print(board);
-    //printf("-----------------------------------------------------\n");
-
-    // flip the results so it matches the orientation of the opponent
-    flip(board);
-
-    // convert results (board data) into a string
-    char results[BUFFER_SIZE];
-    stringify(results, board);
-
-    // send string to the server
-    int w = write(server_socket, results, BUFFER_SIZE);
+    // check whose turn it is
+    if (data == "Game Over") {
+      start = 0;
+      break;
+    }
+    else {
+      // process data recieved from server
+      listify(data, board);
+      flip(board);
+      printf("-----------------------------------------------------\n");
+      print(board);
 	
-    // wait for and recieve player B's results from server
-    //int r = read(server_socket, results, BUFFER_SIZE);
-    
-    // convert player B's string results back into an array
-    //listify(results, board);
+      // process board based on user input
+      process(board);
+      print(board);
+	
+      // check if game is over
+      if (check(board, server_socket) == 0) {
+	start = 0;
+	break;
+      }
+
+      // convert results (board data) into a string
+      char results[BUFFER_SIZE];
+      stringify(results, board);
+
+      // send string to the server
+      write(server_socket, results, BUFFER_SIZE);
+    }
   }
+  read(server_socket, data, BUFFER_SIZE);
+  if (data != "44444404444440")
+    printf("%s\n", data);
+  write(server_socket, "Game Over", BUFFER_SIZE);
   return 0;
 }

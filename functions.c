@@ -1,20 +1,29 @@
 #include "functions.h"
 #include "networking.h"
 
-int convert (char bucket) {
-  char alpha[] = {'A', 'B', 'C', 'D', 'E', 'F'};
+int check (int * board, int server_socket) {
+  int user1 = 0;
+  int user2 = 0;
+    
   for (int i = 0; i < 6; i++) {
-    if (bucket == alpha[i])
-      return i;
+    user1 += board[i];
+    user2 += board[i+7];
   }
-  return 0;
+  if (user1 == 0 || user2 == 0) {
+    user1 += board[6];
+    user2 += board[13];
+    if (user1 > user2)
+      write(server_socket, "lose", BUFFER_SIZE);
+    else
+      write(server_socket, "win", BUFFER_SIZE);
+    return 0;
+  }
+  return 1;
 }
 
 void listify (char * string, int * board) {
-  for (int i = 0; i < 14; i++){
-	//printf("board[%d]: %d\n", i, (string[i] - '0'));
+  for (int i = 0; i < 14; i++)
     board[i] = string[i] - '0';
-	}
 }
 
 void stringify (char * string, int * board) {
@@ -28,20 +37,47 @@ void flip (int * board) {
       temp[i] = board[i - 7];
     else{
       temp[i] = board[i + 7];
-	}
+    }
   }
   for (int i = 0; i < 14; i++)
     board[i] = temp[i];
 }
 
-void update (char bucket, int * board) {
-  int cup = convert(bucket) + 7;
-  for (int i = cup; i < 14 && board[cup] > 0; i++) {
-    board[i] += 1;
-    board[cup] -= 1;
-    if (i == 13 && board[cup] > 0)
-      i = -1;
+int convert (char bucket) {
+  char alpha[] = {'A', 'B', 'C', 'D', 'E', 'F'};
+  for (int i = 0; i < 6; i++) {
+    if (bucket == alpha[i])
+      return i;
   }
+  return 0;
+}
+
+int update (char bucket, int * board) {
+  int cup = convert(bucket) + 7;
+  if (cup == 0)
+    return 0;
+  else {
+    for (int i = cup; i < 14 && board[cup] > 0; i++) {
+      board[i] += 1;
+      board[cup] -= 1;
+      if (i == 13 && board[cup] > 0)
+	i = -1;
+    }
+    for (int i = cup; i < 14 && board[cup] > 0; i++)
+      if (board[i] == 10)
+	board[i] = 0;
+    return 1;
+  }
+}
+
+void process (int * board) {
+  char input[BUFFER_SIZE];
+  int num;
+  printf("Which cup would you like to choose? ");
+  fgets(input, BUFFER_SIZE, stdin);
+  num = update(*input, board);
+  if (num == 0)
+    process(board);
 }
 
 void print (int * board) {
@@ -54,15 +90,34 @@ void print (int * board) {
   printf("     A   B   C   D   E   F   \n"); 
 }
 
-void turn() {
+void make(int * board) {
+  for (int i = 0; i < 14; i++) {
+    if (i == 6 || i == 13)
+      board[i] = 0;
+    else
+      board[i] = 4;
+  }
+}
 
+int game() {
+  char input[BUFFER_SIZE];
+  printf("Press ENTER to start the game or input \"quit\" to quit the game. ");  
+  fgets(input, BUFFER_SIZE, stdin);
+  if (strcmp(input, "\n") == 0)
+    return 1;
+  else if (strcmp(input, "quit\n") == 0) {
+    printf("We are sorry to see you go. Please come back soon!\n");
+    return -1;
+  }
+  else
+    game();
 }
 
 void instructions() {
-  char data[BUFFER_SIZE];
+  char input[BUFFER_SIZE];
   printf("Do you want the game instructions? (y/n) ");
-  fgets(data, BUFFER_SIZE, stdin);
-  if (strcmp(data, "y\n") == 0) {
+  fgets(input, BUFFER_SIZE, stdin);
+  if (strcmp(input, "y\n") == 0) {
     printf("-----------------------------------------------------\n");
     printf("1.  Each player gets six buckets and one mancala(M).\n");
     printf("    The buckets and mandala (located at the ends) will be formatted as shown below.\n");
@@ -90,8 +145,7 @@ void instructions() {
     printf("    remaining marbles into their own mancala. The player with the most marbles\n");
     printf("    in their mancala is the winner of the game.\n");
   }
-  else if (strcmp(data,"n\n") == 0)
+  else if (strcmp(input,"n\n") == 0)
     return;
   else instructions();
 }
-
