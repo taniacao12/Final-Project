@@ -15,37 +15,35 @@ int main(int argc, char ** argv) {
   // welcome user and give or skip instructions
   printf("WELCOME TO TEAMANCALA!\n");
   instructions();
-  
+
   // conncect user to server and wait for other player
   printf("Waiting for other player to join...\n");
   char receive[100];
   read(server_socket, receive, 100);
   printf("%s\n", receive);
-  
+
   // start game if user is ready
-  start = game();
+  start = game(server_socket);
   int board[14];
-  
+
   while (start == 1) {
     // player waits for confirmation from the server to start
     read(server_socket, data, BUFFER_SIZE);
 
     // check whose turn it is
-    if (data == "Game Over") {
+    if (data == "Game Over" || data == "win" || data == "lose")
       start = 0;
-      break;
-    }
     else {
       // process data recieved from server
       listify(data, board);
       flip(board);
       printf("-----------------------------------------------------\n");
       print(board);
-	
+
       // process board based on user input
       process(board);
       print(board);
-	
+
       // check if game is over
       if (check(board, server_socket) == 0) {
 	start = 0;
@@ -61,8 +59,6 @@ int main(int argc, char ** argv) {
     }
   }
   read(server_socket, data, BUFFER_SIZE);
-  if (data != "44444404444440")
-    printf("%s\n", data);
-  write(server_socket, "Game Over", BUFFER_SIZE);
+  //printf("%s\n", data);
   return 0;
 }

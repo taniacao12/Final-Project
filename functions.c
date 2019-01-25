@@ -4,7 +4,7 @@
 int check (int * board, int server_socket) {
   int user1 = 0;
   int user2 = 0;
-    
+
   for (int i = 0; i < 6; i++) {
     user1 += board[i];
     user2 += board[i+7];
@@ -62,7 +62,7 @@ int update (char bucket, int * board) {
 	i++;
       board[i] += 1;
       board[cup] -= 1;
-      if (i > 6 && i !== 13 && board[cup] == 0 && board[i] == 1) {
+      if (i > 6 && i != 13 && board[cup] == 0 && board[i] == 1 && board[12 - i] > 0) {
 	board[13] += board[i] + board[12 - i];
 	board[i] = 0;
 	board[12 - i] = 0;
@@ -94,7 +94,7 @@ void print (int * board) {
   for (int i = 7; i < 14; i++)
     printf("{%d} ", board[i]);
   printf("\n");
-  printf("     A   B   C   D   E   F   \n"); 
+  printf("     A   B   C   D   E   F   \n");
 }
 
 void make(int * board) {
@@ -106,18 +106,19 @@ void make(int * board) {
   }
 }
 
-int game() {
+int game(int server_socket) {
   char input[BUFFER_SIZE];
-  printf("Press ENTER to start the game or input \"quit\" to quit the game. ");  
+  printf("Press ENTER to start the game or input \"quit\" to quit the game. ");
   fgets(input, BUFFER_SIZE, stdin);
   if (strcmp(input, "\n") == 0)
     return 1;
   else if (strcmp(input, "quit\n") == 0) {
     printf("We are sorry to see you go. Please come back soon!\n");
+    write(server_socket, "Game Over", BUFFER_SIZE);
     return -1;
   }
   else
-    game();
+    game(server_socket);
 }
 
 void instructions() {

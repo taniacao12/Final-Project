@@ -2,7 +2,7 @@
 void subserver(int player1, int player2);
 
 // functions for client ------------------------------------------------------------
-int game(); // game status
+int game(int server_socket); // game status
 void instructions(); // display instructions
 void process (int * board); // process board based on user input
 int check (int * board, int server_socket); // check to see if someone won the game
