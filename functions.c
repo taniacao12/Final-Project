@@ -58,14 +58,21 @@ int update (char bucket, int * board) {
     return 0;
   else {
     for (int i = cup; i < 14 && board[cup] > 0; i++) {
+      if (i == 6)
+	i++;
       board[i] += 1;
       board[cup] -= 1;
-      if (i == 13 && board[cup] > 0)
+      if (i > 6 && i !== 13 && board[cup] == 0 && board[i] == 1) {
+	board[13] += board[i] + board[12 - i];
+	board[i] = 0;
+	board[12 - i] = 0;
+      }
+      else if (i == 13 && board[cup] > 0)
 	i = -1;
     }
-    for (int i = cup; i < 14 && board[cup] > 0; i++)
+    for (int i = 0; i < 14; i++)
       if (board[i] == 10)
-	board[i] = 0;
+	board[i] -= 10;
     return 1;
   }
 }
@@ -129,8 +136,9 @@ void instructions() {
     printf("3.  On your turn, each player you will be asked to input your bucket of choice.\n");
     printf("    All the marbles in that bucket will then be distributed counter-clockwise\n");
     printf("    into the other buckets and to your mancala (one per bucket).\n");
-    printf("      a) If the last marble distributed lands in your mancala, you get an extra play.\n");
-    printf("      b) If the last marble distributed lands in an empty bucket on your side of the\n");
+    printf("      a) If there are any buckets or mancala with 10 or more marbles after all marbles have\n");
+    printf("         been distributed, 10 marbles will be taken away from the corresponding bucket.\n");
+    printf("      a) If the last marble distributed lands in an empty bucket on your side of the\n");
     printf("         board, all marbles in the current bucket and the bucket directly above will be\n");
     printf("         placed in your mancala. Here's an example:\n");
     printf("           {6} {3} {5} {1} {3} {6} {2}\n");
